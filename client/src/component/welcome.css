@@ -1,0 +1,20 @@
+/* src/Home.css */
+.welcome-container {
+  height: 100vh;
+  background-image: url('../assets/book.jpg'); /* if in public folder */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: larger;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.welcome-message {
+  text-align: center;
+  background-color: rgba(16, 16, 16, 0.5); /* dark overlay for readability */
+  padding: 2rem;
+  border-radius: 10px;
+}
