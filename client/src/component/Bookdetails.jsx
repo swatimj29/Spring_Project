@@ -11,6 +11,10 @@ const Bookdetails = () => {
   const [bookList, setBookList] = useState([]);
   const [editingId, setEditingId] = useState(null); // null means adding new book
 
+  // Use environment variable for backend URL
+  const BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
+
+
   // Fetch books on load
   useEffect(() => {
     fetchBooks();
@@ -18,7 +22,8 @@ const Bookdetails = () => {
 
   const fetchBooks = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/books');
+
+      const res = await axios.get(`${BASE_URL}/books`);
       setBookList(res.data);
     } catch (err) {
       console.error("Failed to fetch books:", err.message);
@@ -41,11 +46,11 @@ const Bookdetails = () => {
     try {
       if (editingId) {
         // Update existing book
-        await axios.put(`http://localhost:8080/books/${editingId}`, formData);
+        await axios.put(`${BASE_URL}/books/${editingId}`, formData);
         alert("Book updated successfully!");
       } else {
         // Add new book
-        await axios.post('http://localhost:8080/books', formData);
+        await axios.post(`${BASE_URL}/books`, formData);
         alert("Book added successfully!");
       }
       setFormData({ title: '', author: '', price: '' });
@@ -60,7 +65,7 @@ const Bookdetails = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this book?")) return;
     try {
-      await axios.delete(`http://localhost:8080/books/${id}`);
+      await axios.delete(`${BASE_URL}/books/${id}`);
       alert("Book deleted successfully!");
       fetchBooks();
     } catch (error) {

@@ -7,7 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/books")
-@CrossOrigin(origins = "http://localhost:5173") // for React
+@CrossOrigin(origins = "http://localhost:3000") // for React
 public class BookController {
 
     private final BookService service;
