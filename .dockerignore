@@ -1,0 +1,5 @@
+client
+*.log
+*.jar
+*.txt
+Spring_Project-mirror
