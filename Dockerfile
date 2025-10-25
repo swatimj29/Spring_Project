@@ -9,7 +9,7 @@ COPY pom.xml ./pom.xml
 # Copy source code from bookstore folder
 COPY bookstore/src ./src
 
-# Build the jar (skip tests)
+# Build the jar (skip tests for faster build)
 RUN mvn clean package -DskipTests
 
 # ---------- Stage 2: Runtime image ----------
@@ -20,6 +20,8 @@ WORKDIR /app
 # Copy the jar from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
+# Expose Spring Boot port
 EXPOSE 8080
 
+# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
