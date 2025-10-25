@@ -7,7 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/books")
-@CrossOrigin(origins = "http://localhost:3000") // for React
+@CrossOrigin(origins = {"http://localhost:3000", "http://spring-project-rosy.vercel.app"})
 public class BookController {
 
     private final BookService service;
