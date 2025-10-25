@@ -1,43 +1,59 @@
+
 version: '3.9'
 
 services:
-  # MySQL Database
-  db:
-    image: mysql:8.1
-    container_name: bookstore-db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root123
-      MYSQL_DATABASE: bookstore
-    ports:
-      - "3307:3306"  # Host port 3307 → container 3306
-    volumes:
-      - mysql-data:/var/lib/mysql
-
-  # Spring Boot Backend
   backend:
     build: ./bookstore
     container_name: bookstore-backend
     ports:
-      - "8080:8080"  # Host port 8080 → container 8080
+      - "8080:8080"  # Exposes backend to host
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/bookstore
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root123
-    depends_on:
-      - db
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_DB: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASS: ${MYSQL_PASS}
+
+#version: '3.9'
+
+#services:
+  # MySQL Database
+ # db:
+  #  image: mysql:8.1
+   # container_name: bookstore-db
+   # restart: always
+   # environment:
+    #  MYSQL_ROOT_PASSWORD: root123
+     # MYSQL_DATABASE: bookstore
+    #ports:
+     # - "3307:3306"  # Host port 3307 → container 3306
+    #volumes:
+     # - mysql-data:/var/lib/mysql
+
+  # Spring Boot Backend
+  #backend:
+   # build: ./bookstore
+    #container_name: bookstore-backend
+    #ports:
+     # - "8080:8080"  # Host port 8080 → container 8080
+    #environment:
+    #  SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/bookstore
+     # SPRING_DATASOURCE_USERNAME: root
+     # SPRING_DATASOURCE_PASSWORD: root123
+    #depends_on:
+     # - db
 
   # React Frontend
-  frontend:
-    build: ./client
-    container_name: spring-client
-    ports:
-      - "3000:80"  # Host port 3000 → Nginx 80 in container
-    environment:
-      REACT_APP_BACKEND_URL: http://bookstore-backend:8080 # Use host port so browser can reach backend
-    depends_on:
-      - backend
+  #frontend:
+  #  build: ./client
+   # container_name: spring-client
+    #ports:
+     # - "3000:80"  # Host port 3000 → Nginx 80 in container
+    #environment:
+     # REACT_APP_BACKEND_URL: http://bookstore-backend:8080 # Use host port so browser can reach backend
+    #depends_on:
+     # - backend
 
 # Persistent volume for MySQL
-volumes:
-  mysql-data:
+#volumes:
+ # mysql-data:
