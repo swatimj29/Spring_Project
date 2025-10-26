@@ -11,7 +11,7 @@ const Bookdetails = () => {
   const [bookList, setBookList] = useState([]);
   const [editingId, setEditingId] = useState(null); // null means adding new book
 
-  const BASE_URL = "https://your-backend-service.onrender.com";
+  const BASE_URL = "https://spring-project-10.onrender.com";
 
   // Use environment variable for backend URL
   //const BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
